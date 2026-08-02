@@ -21,6 +21,9 @@ next-env.d.ts
 # reference scrape (large, not source code)
 reference/
 
+# backend (kept locally only)
+backend/
+
 # misc
 .DS_Store
 *.pem
