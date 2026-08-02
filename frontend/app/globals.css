@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #081E42;
+  --color-primary-light: #15448A;
+  --color-primary-dark: #021C3C;
+  --color-accent: #8CC63F;
+  --color-accent-dark: #6FA62E;
+  --color-accent-light: #A8E07D;
+  --color-soft: #E9EFF5;
+  --color-neutral-50: #F5F7FA;
+  --color-neutral-100: #EBEDF0;
+  --color-neutral-200: #D6D9DE;
+  --color-neutral-300: #B0B4BA;
+  --color-neutral-400: #8A8E96;
+  --color-neutral-500: #6B7A90;
+  --color-neutral-600: #41454D;
+  --color-neutral-700: #2D3138;
+  --color-neutral-800: #1A1C22;
+  --color-neutral-900: #0D0E12;
+
+  --font-heading: "Poppins", system-ui, sans-serif;
+  --font-body: "Poppins", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-neutral-600);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #FFFFFF;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(128, 195, 68, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(128, 195, 68, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
