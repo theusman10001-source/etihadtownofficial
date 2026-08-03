@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "./motion";
-import { contactPhone, contactPhoneE164 } from "@/lib/contact";
+import { contactPhone, contactPhoneE164, whatsappNumber } from "@/lib/contact";
 
 const projectLinks = [
   { label: "Etihad Town Phase IV", href: "/projects/phase-4" },
@@ -27,7 +27,10 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const message = encodeURIComponent(
+    "Hi, I'm interested in learning more about Etihad Town plots and payment plans."
+  );
+  
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
@@ -131,10 +134,10 @@ export function Navbar() {
                 transition={{ delay: 0.4, duration: 0.3 }}
               >
                 <Link
-                  href="/contact"
+                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
                   className="ml-4 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-all duration-200"
                 >
-                  Book a Visit
+                  +92 320 4474819
                 </Link>
               </motion.div>
             </div>
