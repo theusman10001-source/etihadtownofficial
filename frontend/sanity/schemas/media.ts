@@ -38,6 +38,13 @@ export const media = defineType({
       ],
     }),
     defineField({
+      name: "imagePath",
+      title: "Public Image Path",
+      type: "string",
+      description: "Optional alternative for compressed files in the website public folder, e.g. /images/media/phase-iv-launch.webp.",
+      hidden: ({ document }) => document?.mediaType !== "image",
+    }),
+    defineField({
       name: "videoUrl",
       title: "Video URL (YouTube/Vimeo)",
       type: "url",

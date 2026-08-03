@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { submitLead } from "@/app/actions/submit-lead";
 
-const POPUP_DELAY = 2500;
+const POPUP_DELAY = 12000;
+const POPUP_DISMISSED_KEY = "etihad-town-lead-popup-dismissed";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -14,14 +15,20 @@ export function LeadPopup() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    if (window.sessionStorage.getItem(POPUP_DISMISSED_KEY)) return;
     const timer = setTimeout(() => setOpen(true), POPUP_DELAY);
     return () => clearTimeout(timer);
   }, []);
 
+  function closePopup() {
+    window.sessionStorage.setItem(POPUP_DISMISSED_KEY, "true");
+    setOpen(false);
+  }
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closePopup();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -55,7 +62,7 @@ export function LeadPopup() {
         >
           <div
             className="absolute inset-0 bg-primary/70 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
+            onClick={closePopup}
           />
 
           <motion.div
@@ -68,7 +75,7 @@ export function LeadPopup() {
             <div className="h-1.5 bg-gradient-to-r from-accent via-accent-light to-accent" />
 
             <button
-              onClick={() => setOpen(false)}
+              onClick={closePopup}
               aria-label="Close popup"
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-soft hover:bg-neutral-200 text-neutral-500 hover:text-primary flex items-center justify-center transition-colors"
             >
@@ -92,7 +99,7 @@ export function LeadPopup() {
                 <h3 className="text-2xl text-primary font-bold mb-2">Thank You!</h3>
                 <p className="text-neutral-500 text-sm leading-relaxed">{message}</p>
                 <button
-                  onClick={() => setOpen(false)}
+                  onClick={closePopup}
                   className="mt-6 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-colors"
                 >
                   Close

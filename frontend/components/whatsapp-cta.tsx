@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "./motion";
-
-const WHATSAPP_NUMBER = "923204474819";
+import { whatsappNumber } from "@/lib/contact";
 
 export function WhatsAppCTA() {
   const message = encodeURIComponent(
@@ -11,7 +10,7 @@ export function WhatsAppCTA() {
 
   return (
     <motion.a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`}
+      href={`https://wa.me/${whatsappNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

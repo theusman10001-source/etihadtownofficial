@@ -34,7 +34,8 @@ export const mediaGalleryQuery = groq`
     _id,
     title,
     mediaType,
-    image,
+    "image": coalesce(image.asset->url, imagePath),
+    "imageAlt": coalesce(image.alt, title),
     videoUrl,
     description,
     tags

@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://www.google-analytics.com",
+              "img-src 'self' data: blob: https://www.google-analytics.com https://cdn.sanity.io",
               "connect-src 'self' https://www.google-analytics.com https://*.vercel-insights.com",
               "frame-src 'none'",
               "frame-ancestors 'none'",

@@ -19,7 +19,8 @@ interface OrganizationSchema {
 export function organizationSchema(data: OrganizationSchema) {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "RealEstateAgent"],
+    "@id": `${data.url}/#organization`,
     name: data.name,
     description: data.description,
     url: data.url,
@@ -32,6 +33,7 @@ export function organizationSchema(data: OrganizationSchema) {
       "@type": "GeoCoordinates",
       ...data.geo,
     },
+    logo: absoluteUrl("/images/etihad-logo.png"),
   };
 }
 
@@ -43,8 +45,38 @@ export function breadcrumbList(items: { name: string; url: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: item.url,
+      item: absoluteUrl(item.url),
     })),
+  };
+}
+
+export function blogPosting(data: {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  author?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: data.headline,
+    description: data.description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": data.url,
+    },
+    ...(data.image ? { image: data.image } : {}),
+    ...(data.datePublished ? { datePublished: data.datePublished } : {}),
+    author: {
+      "@type": "Organization",
+      name: data.author || "Etihad Town",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Etihad Town",
+    },
   };
 }
 
@@ -95,3 +127,4 @@ export function faqPage(questions: { question: string; answer: string }[]) {
     })),
   };
 }
+import { absoluteUrl } from "@/lib/site";

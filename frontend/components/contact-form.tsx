@@ -3,6 +3,9 @@
 import { useRef, useState } from "react";
 import { submitLead } from "@/app/actions/submit-lead";
 
+const inputClass =
+  "w-full rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 transition-all focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-accent/10";
+
 export function ContactForm() {
   const ref = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -29,24 +32,40 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-white border border-neutral-200 p-8 lg:p-10">
+    <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-[0_25px_70px_rgba(7,30,69,0.1)]">
+      <div className="bg-gradient-to-r from-primary to-primary-light px-8 py-6">
+        <h3 className="flex items-center gap-3 text-lg font-bold text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/20 text-accent">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </span>
+          Send us a message
+        </h3>
+        <p className="mt-1 text-sm text-white/70">
+          Fill the form below — our team responds within a few hours.
+        </p>
+      </div>
+
       {status === "success" ? (
-        <div className="text-center py-12">
-          <div className="w-14 h-14 bg-accent/10 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="px-8 py-16 text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
+            <svg className="h-8 w-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-2xl text-primary mb-2">
+          <h3 className="mt-6 text-2xl font-extrabold text-primary">
             Message Sent
           </h3>
-          <p className="text-neutral-500">{message}</p>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-neutral-500">
+            {message || "Thank you for reaching out. Our sales team will contact you shortly."}
+          </p>
         </div>
       ) : (
-        <form ref={ref} onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <form ref={ref} onSubmit={handleSubmit} className="space-y-5 p-8">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1.5">
+              <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-neutral-700">
                 Full Name *
               </label>
               <input
@@ -54,12 +73,12 @@ export function ContactForm() {
                 name="name"
                 type="text"
                 required
-                className="w-full px-4 py-3 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-all"
+                className={inputClass}
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1.5">
+              <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-neutral-700">
                 Phone Number *
               </label>
               <input
@@ -67,58 +86,60 @@ export function ContactForm() {
                 name="phone"
                 type="tel"
                 required
-                className="w-full px-4 py-3 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-all"
+                className={inputClass}
                 placeholder="0300-1234567"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1.5">
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-neutral-700">
               Email
             </label>
             <input
               id="email"
               name="email"
               type="email"
-              className="w-full px-4 py-3 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-all"
+              className={inputClass}
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="plotInterest" className="block text-sm font-medium text-neutral-700 mb-1.5">
+            <label htmlFor="plotInterest" className="mb-1.5 block text-sm font-medium text-neutral-700">
               Interested In
             </label>
             <select
               id="plotInterest"
               name="plotInterest"
-              className="w-full px-4 py-3 border border-neutral-200 text-neutral-900 focus:outline-none focus:border-primary transition-all"
+              className={inputClass}
             >
               <option value="">Select a phase</option>
-              <option value="phase-4">Phase IV</option>
-              <option value="phase-3">Phase III</option>
+              <option value="phase-4">Etihad Town Phase IV</option>
+              <option value="phase-3">Etihad Town Phase III</option>
+              <option value="phase-2">Etihad Town Phase II</option>
+              <option value="phase-1">Etihad Town Phase I</option>
               <option value="premier-enclave">Premier Enclave</option>
-              <option value="sialkot">Sialkot</option>
+              <option value="sialkot">Etihad Town Sialkot</option>
               <option value="not-sure">Need guidance</option>
             </select>
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1.5">
+            <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-neutral-700">
               Message
             </label>
             <textarea
               id="message"
               name="message"
               rows={4}
-              className="w-full px-4 py-3 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-all resize-none"
+              className={`${inputClass} resize-none`}
               placeholder="Tell us about your requirements..."
             />
           </div>
 
           {status === "error" && (
-            <div className="text-sm text-red-600 bg-red-50 px-4 py-3">
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
               {message}
             </div>
           )}
@@ -126,9 +147,24 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={status === "loading"}
-            className="w-full py-3.5 bg-primary text-white font-semibold hover:bg-primary-light transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.01] hover:bg-primary-light disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {status === "loading" ? "Sending..." : "Send Message"}
+            {status === "loading" ? (
+              <>
+                <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Sending...
+              </>
+            ) : (
+              <>
+                Send Message
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0-4 4m4-4H3" />
+                </svg>
+              </>
+            )}
           </button>
         </form>
       )}

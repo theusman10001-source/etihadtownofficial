@@ -6,15 +6,15 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppCTA } from "@/components/whatsapp-cta";
 import { PageTransition } from "@/components/page-transition";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://etihadtown.com.pk";
+import { contactPhoneE164 } from "@/lib/contact";
+import { absoluteUrl, siteName, siteUrl } from "@/lib/site";
 
 const jsonLd = organizationSchema({
   name: "Etihad Town",
   description:
     "Lahore's premier master-planned community offering residential and commercial plots across multiple phases with flexible payment plans.",
   url: siteUrl,
-  telephone: "+92-42-111-99-88-77",
+  telephone: contactPhoneE164,
   address: {
     streetAddress: "Etihad Town Phase II, 4km Off Ferozpur Road",
     addressLocality: "Lahore",
@@ -36,8 +36,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Etihad Town Lahore — Premium Living & Investment",
+    default: "Etihad Town Lahore | Premium Plots & Investment",
     template: "%s | Etihad Town Lahore",
   },
   description:
@@ -51,16 +52,47 @@ export const metadata: Metadata = {
     "plots in Lahore",
   ],
   openGraph: {
-    title: "Etihad Town Lahore — Premium Living & Investment",
+    title: "Etihad Town Lahore | Premium Plots & Investment",
     description:
       "Master-planned community in Lahore. Residential and commercial plots available with flexible payment plans.",
+    url: siteUrl,
+    siteName,
     locale: "en_PK",
     type: "website",
+    images: [
+      {
+        url: absoluteUrl("/images/hero-banner.webp"),
+        width: 1200,
+        height: 630,
+        alt: "Etihad Town Lahore — premium residential and commercial plots",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Etihad Town Lahore | Premium Plots & Investment",
+    description:
+      "Master-planned community in Lahore. Residential and commercial plots available with flexible payment plans.",
+    images: [absoluteUrl("/images/hero-banner.webp")],
+  },
+  alternates: {
+    canonical: "/",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  category: "real estate",
 };
 
 export default function RootLayout({

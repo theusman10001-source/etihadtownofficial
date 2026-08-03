@@ -2,7 +2,8 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const NOTIFY_EMAIL = "info@etihadtown.com.pk";
+const NOTIFY_EMAIL = "contact.etihadtown@gmail.com";
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Etihad Town <leads@etihadtownofficial.com>";
 
 function escapeHtml(value: string): string {
   return value
@@ -28,7 +29,7 @@ export async function sendLeadNotification(data: {
   plotInterest?: string;
 }) {
   return resend.emails.send({
-    from: "Etihad Town <leads@etihadtown.com.pk>",
+    from: FROM_EMAIL,
     to: NOTIFY_EMAIL,
     subject: `New Inquiry: ${data.name} — ${data.source}`,
     html: `
@@ -54,7 +55,7 @@ export async function sendBookingNotification(data: {
   plotInterest?: string;
 }) {
   return resend.emails.send({
-    from: "Etihad Town <bookings@etihadtown.com.pk>",
+    from: FROM_EMAIL,
     to: NOTIFY_EMAIL,
     subject: `New ${data.type === "site_visit" ? "Site Visit" : "Booking"} Request: ${data.name}`,
     html: `

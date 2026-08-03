@@ -4,14 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "./motion";
+import { contactPhone, contactPhoneE164 } from "@/lib/contact";
 
 const projectLinks = [
-  { label: "Phase IV", href: "/projects/phase-4" },
-  { label: "Phase III", href: "/projects/phase-3" },
-  { label: "Phase II", href: "/projects/phase-2" },
-  { label: "Phase I", href: "/projects/phase-1" },
+  { label: "Etihad Town Phase IV", href: "/projects/phase-4" },
+  { label: "Etihad Town Phase III", href: "/projects/phase-3" },
+  { label: "Etihad Town Phase II", href: "/projects/phase-2" },
+  { label: "Etihad Town Phase I", href: "/projects/phase-1" },
   { label: "Premier Enclave", href: "/projects/premier-enclave" },
-  { label: "Sialkot", href: "/projects/sialkot" },
+  { label: "Etihad Town Sialkot", href: "/projects/sialkot" },
 ];
 
 const navLinks = [
@@ -202,7 +203,7 @@ export function Navbar() {
                 <div className="mt-8 pt-6 border-t border-neutral-100">
                   <p className="text-xs text-neutral-400 tracking-wider uppercase mb-3">Corporate Office</p>
                   <p className="text-sm text-neutral-600 leading-relaxed">Etihad Town Phase II<br />4km Off Ferozpur Road, Lahore</p>
-                  <a href="tel:+9242111998877" className="block mt-3 text-sm font-medium text-primary">+92 42 111 99 88 77</a>
+                  <a href={`tel:${contactPhoneE164}`} className="block mt-3 text-sm font-medium text-primary">{contactPhone}</a>
                   <Link href="/contact" className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark" onClick={() => setMobileOpen(false)}>
                     Book a Visit
                   </Link>

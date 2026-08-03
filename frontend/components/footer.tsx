@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { contactEmail, contactPhone, contactPhoneE164, whatsappNumber } from "@/lib/contact";
 
 const socials = [
   {
@@ -29,14 +30,14 @@ export function Footer() {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm tracking-wider">ET</span>
-              </span>
-              <span className="text-white text-lg font-bold tracking-tight">
-                Etihad Town
-              </span>
-            </div>
+            <Link href="/" className="inline-flex items-center mb-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/etihad-logo.png"
+                alt="Etihad Town"
+                className="h-9 lg:h-10 w-auto"
+              />
+            </Link>
             <p className="text-sm leading-relaxed max-w-sm text-neutral-500">
               A master-planned community by the Etihad Group — built on trust, 
               transparency, and quality. Residential and commercial plots 
@@ -50,14 +51,14 @@ export function Footer() {
               </p>
               <p>
                 <span className="text-neutral-400">Phone:</span>{" "}
-                <a href="tel:+9242111998877" className="text-neutral-500 hover:text-accent transition-colors">
-                  +92 42 111 99 88 77
+                <a href={`tel:${contactPhoneE164}`} className="text-neutral-500 hover:text-accent transition-colors">
+                  {contactPhone}
                 </a>
               </p>
               <p>
                 <span className="text-neutral-400">Email:</span>{" "}
-                <a href="mailto:info@etihadtown.com.pk" className="text-neutral-500 hover:text-accent transition-colors">
-                  info@etihadtown.com.pk
+                <a href={`mailto:${contactEmail}`} className="text-neutral-500 hover:text-accent transition-colors">
+                  {contactEmail}
                 </a>
               </p>
             </div>
@@ -87,7 +88,7 @@ export function Footer() {
               <li><Link href="/contact" className="text-neutral-500 hover:text-accent transition-colors">Contact</Link></li>
               <li>
                 <a
-                  href="https://wa.me/923204474819"
+                  href={`https://wa.me/${whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-500 hover:text-accent transition-colors"
@@ -123,7 +124,7 @@ export function Footer() {
 
         <div className="border-t border-white/5 mt-10 pt-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-neutral-500">
-            <p><span className="text-neutral-400 font-medium">Pakistan:</span> +92 42 111 99 88 77</p>
+            <p><span className="text-neutral-400 font-medium">Pakistan:</span> {contactPhone}</p>
             <p><span className="text-neutral-400 font-medium">UAE:</span> +971 52 744 6451</p>
             <p><span className="text-neutral-400 font-medium">UK:</span> +44 (0) 203 1500 958</p>
           </div>
