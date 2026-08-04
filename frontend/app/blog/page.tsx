@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getBlogPosts } from "@/lib/sanity.queries";
 import { breadcrumbList } from "@/lib/schemas";
@@ -6,15 +7,16 @@ import { parsePostDate } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Property Blog, Updates & Investment Guides",
+  title: "Blog & Investment Guides",
   description:
     "Latest updates on Etihad Town Lahore — payment plans, development progress, investment tips, and community news.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Etihad Town Property Blog & Investment Guides",
+    title: "Etihad Town Blog & Investment Guides",
     description:
       "Payment plans, development updates, and real-estate investment guides from Etihad Town Lahore.",
     url: "/blog",
+    images: [{ url: "/images/home-banner.webp", alt: "Etihad Town Lahore blog and investment guides" }],
   },
 };
 
@@ -178,11 +180,12 @@ export default async function BlogPage() {
                       >
                         <div className="relative aspect-[16/10] overflow-hidden bg-soft">
                           {post.image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
+                            <Image
                               src={post.image}
                               alt={post.title}
-                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                           ) : (
                             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary to-primary-light">

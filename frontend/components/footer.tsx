@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { contactEmail, contactPhone, contactPhoneE164, whatsappNumber } from "@/lib/contact";
 
 const socials = [
@@ -31,10 +32,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center mb-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/etihad-logo.png"
                 alt="Etihad Town"
+                width={559}
+                height={172}
                 className="h-9 lg:h-10 w-auto"
               />
             </Link>

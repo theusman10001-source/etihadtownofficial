@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getBlogPosts } from "@/lib/sanity.queries";
 import { parsePostDate } from "@/lib/utils";
 
@@ -64,13 +65,14 @@ export async function BlogPreview() {
                 className="group block"
               >
                 <article>
-                  <div className="aspect-[16/10] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 mb-4 overflow-hidden">
+                  <div className="relative aspect-[16/10] rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 mb-4 overflow-hidden">
                     {post.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
                       <div className="w-full h-full bg-neutral-200 group-hover:scale-105 transition-transform duration-500" />

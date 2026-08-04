@@ -3,6 +3,7 @@ interface OrganizationSchema {
   description: string;
   url: string;
   telephone: string;
+  email?: string;
   address: {
     streetAddress: string;
     addressLocality: string;
@@ -14,6 +15,10 @@ interface OrganizationSchema {
     latitude: number;
     longitude: number;
   };
+  sameAs?: string[];
+  foundingDate?: string;
+  areaServed?: string[];
+  priceRange?: string;
 }
 
 export function organizationSchema(data: OrganizationSchema) {
@@ -22,9 +27,11 @@ export function organizationSchema(data: OrganizationSchema) {
     "@type": ["Organization", "RealEstateAgent"],
     "@id": `${data.url}/#organization`,
     name: data.name,
+    alternateName: "Etihad Real Estate",
     description: data.description,
     url: data.url,
     telephone: data.telephone,
+    ...(data.email ? { email: data.email } : {}),
     address: {
       "@type": "PostalAddress",
       ...data.address,
@@ -34,6 +41,18 @@ export function organizationSchema(data: OrganizationSchema) {
       ...data.geo,
     },
     logo: absoluteUrl("/images/etihad-logo.png"),
+    image: absoluteUrl("/images/hero-banner.webp"),
+    ...(data.sameAs ? { sameAs: data.sameAs } : {}),
+    ...(data.foundingDate ? { foundingDate: data.foundingDate } : {}),
+    ...(data.areaServed
+      ? {
+          areaServed: data.areaServed.map((a) => ({
+            "@type": "City",
+            name: a,
+          })),
+        }
+      : {}),
+    ...(data.priceRange ? { priceRange: data.priceRange } : {}),
   };
 }
 
@@ -110,6 +129,58 @@ export function realEstateListing(plot: {
       addressLocality: plot.address,
     },
     availability: plot.availability,
+  };
+}
+
+const availabilityMap: Record<string, string> = {
+  Available: "https://schema.org/InStock",
+  Limited: "https://schema.org/LimitedAvailability",
+  "Waiting List": "https://schema.org/PreOrder",
+  "Sold Out": "https://schema.org/SoldOut",
+};
+
+/**
+ * Combines Place + Offer + AggregateOffer for a project/phase detail page so
+ * search engines can surface price and availability in rich results.
+ */
+export function projectListingSchema(project: {
+  name: string;
+  description: string;
+  url: string;
+  image: string;
+  location: string;
+  status: string;
+  startingPrice: number;
+  currency?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["Place", "Product"],
+    "@id": `${project.url}#project`,
+    name: project.name,
+    description: project.description,
+    url: project.url,
+    image: project.image,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: project.location,
+      addressCountry: "PK",
+    },
+    ...(project.startingPrice > 0
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: project.startingPrice,
+            priceCurrency: project.currency || "PKR",
+            availability: availabilityMap[project.status] || "https://schema.org/InStock",
+            url: project.url,
+            seller: {
+              "@type": "Organization",
+              name: "Etihad Town",
+            },
+          },
+        }
+      : {}),
   };
 }
 

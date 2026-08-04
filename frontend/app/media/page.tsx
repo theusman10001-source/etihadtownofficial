@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getMedia } from "@/lib/sanity.queries";
 import { breadcrumbList } from "@/lib/schemas";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Media Gallery",
+  title: "Photos & Videos Gallery",
   description:
     "Browse photos and videos of Etihad Town Lahore — aerial views, development progress, infrastructure, and community spaces.",
   alternates: { canonical: "/media" },
+  openGraph: {
+    title: "Etihad Town Photos & Videos Gallery",
+    description:
+      "Aerial views, development progress, infrastructure, and community spaces across Etihad Town Lahore.",
+    url: "/media",
+    images: [{ url: "/images/about-bg.webp", alt: "Etihad Town Lahore photo and video gallery" }],
+  },
 };
 
 type MediaItem = {
@@ -39,13 +47,14 @@ function MediaCard({ item, index }: { item: MediaItem; index: number }) {
           featured ? "md:col-span-2 md:row-span-2" : ""
         }`}
       >
-        <div className={`${featured ? "h-full min-h-[420px]" : "aspect-[4/3]"} overflow-hidden`}>
+        <div className={`relative ${featured ? "h-full min-h-[420px]" : "aspect-[4/3]"} overflow-hidden`}>
           {item.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={item.image}
               alt={item.imageAlt || item.title}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              fill
+              sizes={featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
           ) : (

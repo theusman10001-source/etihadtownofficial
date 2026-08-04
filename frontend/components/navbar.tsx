@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "./motion";
@@ -46,10 +47,12 @@ export function Navbar() {
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link href="/" className="flex items-center shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/etihad-logo.png"
                 alt="Etihad Town"
+                width={559}
+                height={172}
+                priority
                 className="h-8 lg:h-9 w-auto"
               />
             </Link>
@@ -176,10 +179,11 @@ export function Navbar() {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src="/images/etihad-logo.png"
                       alt="Etihad Town"
+                      width={559}
+                      height={172}
                       className="h-8 w-auto"
                     />
                   </div>

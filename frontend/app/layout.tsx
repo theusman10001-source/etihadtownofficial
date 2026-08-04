@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { organizationSchema } from "@/lib/schemas";
@@ -26,6 +26,15 @@ const jsonLd = organizationSchema({
     latitude: 31.5204,
     longitude: 74.3587,
   },
+  sameAs: [
+    "https://www.facebook.com/share/19AzuzCw8h/",
+    "https://www.instagram.com/etihadtownofficial",
+    "https://www.linkedin.com/company/etihadrealestate/",
+    "https://youtube.com/@etihadtown",
+  ],
+  foundingDate: "2005",
+  areaServed: ["Lahore", "Sialkot", "Rahim Yar Khan"],
+  priceRange: "Rs. 47.5 Lac – Rs. 13 Crore",
 });
 
 const poppins = Poppins({
@@ -48,8 +57,16 @@ export const metadata: Metadata = {
     "Etihad Town plots",
     "Etihad Town payment plan",
     "Etihad Town Phase 4",
+    "Etihad Town Sialkot",
     "Lahore real estate",
     "plots in Lahore",
+    "residential plots Lahore",
+    "commercial plots Lahore",
+    "5 marla plot Lahore",
+    "10 marla plot Lahore",
+    "housing society Lahore",
+    "Ferozepur Road housing scheme",
+    "Etihad Real Estate",
   ],
   openGraph: {
     title: "Etihad Town Lahore | Premium Plots & Investment",
@@ -93,6 +110,12 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   category: "real estate",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#081E42",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

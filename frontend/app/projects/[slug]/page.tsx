@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import type { PaymentPlanGroup, PaymentPlanRow } from "@/lib/projects"
 import { projects, getProjectBySlug, getStartingPrice, formatPrice, formatPriceCr } from "@/lib/projects"
-import { breadcrumbList, faqPage } from "@/lib/schemas"
+import { breadcrumbList, faqPage, projectListingSchema } from "@/lib/schemas"
 import { absoluteUrl } from "@/lib/site"
 import { Reveal } from "@/components/reveal"
 
@@ -179,20 +179,16 @@ export default async function ProjectPage({ params }: Props) {
   const startingPrice = getStartingPrice(project)
 
   const priceLabel = formatPriceCr(startingPrice)
-  const projectSchema = {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    "@id": `${absoluteUrl(`/projects/${slug}`)}#project`,
+  const projectSchema = projectListingSchema({
     name: `Etihad Town ${project.name}`,
     description: project.description,
     url: absoluteUrl(`/projects/${slug}`),
     image: absoluteUrl(`/images/${slug}.webp`),
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: project.location,
-      addressCountry: "PK",
-    },
-  }
+    location: project.location,
+    status: project.status,
+    startingPrice,
+    currency: project.paymentPlans?.[0]?.rows?.[0]?.currency || "PKR",
+  })
 
   return (
     <>
