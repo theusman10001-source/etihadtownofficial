@@ -1,9 +1,22 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const NOTIFY_EMAIL = "contact.etihadtown@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Etihad Town <leads@etihadtownofficial.com>";
+
+let resendClient: Resend | null = null;
+
+function getResendClient(): Resend {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error(
+      "RESEND_API_KEY is not configured. Set it in the deployment environment variables."
+    );
+  }
+  if (!resendClient) {
+    resendClient = new Resend(apiKey);
+  }
+  return resendClient;
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -28,7 +41,7 @@ export async function sendLeadNotification(data: {
   source: string;
   plotInterest?: string;
 }) {
-  return resend.emails.send({
+  return getResendClient().emails.send({
     from: FROM_EMAIL,
     to: NOTIFY_EMAIL,
     subject: `New Inquiry: ${data.name} — ${data.source}`,
@@ -54,7 +67,7 @@ export async function sendBookingNotification(data: {
   preferredDate?: string;
   plotInterest?: string;
 }) {
-  return resend.emails.send({
+  return getResendClient().emails.send({
     from: FROM_EMAIL,
     to: NOTIFY_EMAIL,
     subject: `New ${data.type === "site_visit" ? "Site Visit" : "Booking"} Request: ${data.name}`,
