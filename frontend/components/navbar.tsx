@@ -145,15 +145,23 @@ export function Navbar() {
               </motion.div>
             </div>
 
-            <button
-              className="lg:hidden p-2 text-primary"
-              aria-label={mobileOpen ? "Close" : "Menu"}
-              onClick={() => setMobileOpen(true)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-2 lg:hidden">
+              <Link
+                href={`https://wa.me/${whatsappNumber}?text=${message}`}
+                className="px-3 py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full hover:bg-accent-dark transition-colors whitespace-nowrap"
+              >
+                +92 320 4474819
+              </Link>
+              <button
+                className="p-2 text-primary"
+                aria-label={mobileOpen ? "Close" : "Menu"}
+                onClick={() => setMobileOpen(true)}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
