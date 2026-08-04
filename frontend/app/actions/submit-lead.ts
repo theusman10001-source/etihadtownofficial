@@ -14,12 +14,12 @@ const leadSchema = z.object({
 
 export async function submitLead(formData: FormData) {
   const raw = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    message: formData.get("message"),
+    name: formData.get("name") ?? undefined,
+    phone: formData.get("phone") ?? undefined,
+    email: formData.get("email") ?? undefined,
+    message: formData.get("message") ?? undefined,
     source: formData.get("source") || "website",
-    plotInterest: formData.get("plotInterest"),
+    plotInterest: formData.get("plotInterest") ?? undefined,
   };
 
   const parsed = leadSchema.safeParse(raw);

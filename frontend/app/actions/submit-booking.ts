@@ -14,12 +14,12 @@ const bookingSchema = z.object({
 
 export async function submitBooking(formData: FormData) {
   const raw = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    type: formData.get("type"),
-    preferredDate: formData.get("preferredDate"),
-    plotInterest: formData.get("plotInterest"),
+    name: formData.get("name") ?? undefined,
+    phone: formData.get("phone") ?? undefined,
+    email: formData.get("email") ?? undefined,
+    type: formData.get("type") ?? undefined,
+    preferredDate: formData.get("preferredDate") ?? undefined,
+    plotInterest: formData.get("plotInterest") ?? undefined,
   };
 
   const parsed = bookingSchema.safeParse(raw);
