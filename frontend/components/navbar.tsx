@@ -211,8 +211,8 @@ export function Navbar() {
                   <p className="text-xs text-neutral-400 tracking-wider uppercase mb-3">Corporate Office</p>
                   <p className="text-sm text-neutral-600 leading-relaxed">Etihad Town Phase II<br />4km Off Ferozpur Road, Lahore</p>
                   <a href={`tel:${contactPhoneE164}`} className="block mt-3 text-sm font-medium text-primary">{contactPhone}</a>
-                  <Link href="/contact" className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark" onClick={() => setMobileOpen(false)}>
-                    Book a Visit
+                  <Link href={`https://wa.me/${whatsappNumber}?text=${message}`} className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark" onClick={() => setMobileOpen(false)}>
+                   +92 320 4474819
                   </Link>
                 </div>
               </div>
