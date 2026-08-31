@@ -29,9 +29,9 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const message = encodeURIComponent(
-    "Hi, I'm interested in learning more about Etihad Town plots and payment plans."
+    "Hi, I'm interested in learning more about Etihad Town plots and payment plans.",
   );
-  
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
@@ -75,9 +75,16 @@ export function Navbar() {
                         Projects
                         <svg
                           className={`w-3 h-3 mt-0.5 transition-transform ${open ? "rotate-180" : ""}`}
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
                         </svg>
                       </span>
                       <AnimatePresence>
@@ -101,7 +108,9 @@ export function Navbar() {
                                 key={pl.href}
                                 href={pl.href}
                                 className={`block px-5 py-3 text-sm text-neutral-600 hover:text-primary hover:bg-neutral-50 transition-colors ${
-                                  idx < projectLinks.length - 1 ? "border-b border-neutral-50" : ""
+                                  idx < projectLinks.length - 1
+                                    ? "border-b border-neutral-50"
+                                    : ""
                                 }`}
                                 onClick={() => setOpen(false)}
                               >
@@ -116,7 +125,9 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       className={`relative px-4 py-2 text-sm font-medium transition-colors ${
-                        isActive(link.href) ? "text-primary" : "text-neutral-600 hover:text-primary"
+                        isActive(link.href)
+                          ? "text-primary"
+                          : "text-neutral-600 hover:text-primary"
                       }`}
                     >
                       {link.label}
@@ -124,7 +135,11 @@ export function Navbar() {
                         <motion.span
                           className="absolute -bottom-[3px] left-4 right-4 h-0.5 bg-accent rounded-full"
                           layoutId="nav-active"
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                          }}
                         />
                       )}
                     </Link>
@@ -137,10 +152,10 @@ export function Navbar() {
                 transition={{ delay: 0.4, duration: 0.3 }}
               >
                 <Link
-                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
+                  href={`https://wa.me/${whatsappNumber}?text=${message}`}
                   className="ml-4 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-all duration-200"
                 >
-                  +92 320 4474819
+                  +92 311 2233379
                 </Link>
               </motion.div>
             </div>
@@ -150,15 +165,25 @@ export function Navbar() {
                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
                 className="px-3 py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full hover:bg-accent-dark transition-colors whitespace-nowrap"
               >
-                +92 320 4474819
+                +92 311 2233379
               </Link>
               <button
                 className="p-2 text-primary"
                 aria-label={mobileOpen ? "Close" : "Menu"}
                 onClick={() => setMobileOpen(true)}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               </button>
             </div>
@@ -195,32 +220,97 @@ export function Navbar() {
                       className="h-8 w-auto"
                     />
                   </div>
-                  <button onClick={() => setMobileOpen(false)} className="p-2 text-neutral-400 hover:text-primary">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <button
+                    onClick={() => setMobileOpen(false)}
+                    className="p-2 text-neutral-400 hover:text-primary"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
 
                 <div className="space-y-1">
-                  <Link href="/" className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary" onClick={() => setMobileOpen(false)}>Home</Link>
-                  <Link href="/projects" className="block py-3 text-sm font-medium border-b border-neutral-100 text-primary" onClick={() => setMobileOpen(false)}>All Projects</Link>
+                  <Link
+                    href="/"
+                    className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/projects"
+                    className="block py-3 text-sm font-medium border-b border-neutral-100 text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    All Projects
+                  </Link>
                   <div className="pl-4 space-y-0 ml-4 border-l border-neutral-200 mb-2 mt-1">
                     {projectLinks.map((pl) => (
-                      <Link key={pl.href} href={pl.href} className="block py-2 text-sm text-neutral-500 hover:text-primary" onClick={() => setMobileOpen(false)}>{pl.label}</Link>
+                      <Link
+                        key={pl.href}
+                        href={pl.href}
+                        className="block py-2 text-sm text-neutral-500 hover:text-primary"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {pl.label}
+                      </Link>
                     ))}
                   </div>
-                  <Link href="/blog" className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary" onClick={() => setMobileOpen(false)}>Blog</Link>
-                  <Link href="/media" className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary" onClick={() => setMobileOpen(false)}>Media</Link>
-                  <Link href="/contact" className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary" onClick={() => setMobileOpen(false)}>Contact</Link>
+                  <Link
+                    href="/blog"
+                    className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Blog
+                  </Link>
+                  <Link
+                    href="/media"
+                    className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Media
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="block py-3 text-sm font-medium border-b border-neutral-100 text-neutral-600 hover:text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Contact
+                  </Link>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-neutral-100">
-                  <p className="text-xs text-neutral-400 tracking-wider uppercase mb-3">Corporate Office</p>
-                  <p className="text-sm text-neutral-600 leading-relaxed">Etihad Town Phase II<br />4km Off Ferozpur Road, Lahore</p>
-                  <a href={`tel:${contactPhoneE164}`} className="block mt-3 text-sm font-medium text-primary">{contactPhone}</a>
-                  <Link href={`https://wa.me/${whatsappNumber}?text=${message}`} className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark" onClick={() => setMobileOpen(false)}>
-                   +92 320 4474819
+                  <p className="text-xs text-neutral-400 tracking-wider uppercase mb-3">
+                    Corporate Office
+                  </p>
+                  <p className="text-sm text-neutral-600 leading-relaxed">
+                    Etihad Town Phase II
+                    <br />
+                    4km Off Ferozpur Road, Lahore
+                  </p>
+                  <a
+                    href={`tel:${contactPhoneE164}`}
+                    className="block mt-3 text-sm font-medium text-primary"
+                  >
+                    {contactPhone}
+                  </a>
+                  <Link
+                    href={`https://wa.me/${whatsappNumber}?text=${message}`}
+                    className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    +92 311 2233379
                   </Link>
                 </div>
               </div>
