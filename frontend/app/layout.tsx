@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { organizationSchema } from "@/lib/schemas";
@@ -135,6 +136,19 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-[family-name:var(--font-poppins)]">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-9XD8Y1VEHS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9XD8Y1VEHS');
+          `}
+        </Script>
         <Navbar />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>
