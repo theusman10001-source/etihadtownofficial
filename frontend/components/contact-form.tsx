@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { submitLead } from "@/app/actions/submit-lead";
 
 const inputClass =
   "w-full rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 transition-all focus:border-accent focus:bg-white focus:outline-none focus:ring-4 focus:ring-accent/10";
 
 export function ContactForm() {
+  const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -28,6 +30,7 @@ export function ContactForm() {
       setStatus("success");
       setMessage(result.message || "");
       ref.current?.reset();
+      router.push("/thank-you");
     }
   }
 

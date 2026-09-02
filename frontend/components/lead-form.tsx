@@ -1,10 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { submitLead } from "@/app/actions/submit-lead";
 import { motion } from "./motion";
 
 export function LeadForm() {
+  const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -23,6 +25,7 @@ export function LeadForm() {
       setStatus("success");
       setMessage(result.message || "");
       ref.current?.reset();
+      router.push("/thank-you");
     }
   }
 

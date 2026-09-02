@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { submitLead } from "@/app/actions/submit-lead";
 
@@ -10,6 +11,7 @@ const POPUP_DISMISSED_KEY = "etihad-town-lead-popup-dismissed";
 type Status = "idle" | "loading" | "success" | "error";
 
 export function LeadPopup() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -47,6 +49,8 @@ export function LeadPopup() {
     } else {
       setStatus("success");
       setMessage(result.message || "");
+      closePopup();
+      router.push("/thank-you");
     }
   }
 
