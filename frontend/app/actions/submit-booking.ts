@@ -4,22 +4,31 @@ import { z } from "zod";
 import { sendBookingNotification } from "@/lib/email";
 
 const bookingSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  phone: z.string().min(10, "Invalid phone number"),
-  email: z.string().email("Invalid email").optional().or(z.literal("")),
+  name: z.string().trim().min(2, "Name must be at least 2 characters"),
+  phone: z.string().trim().min(7, "Please enter a valid phone number"),
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
   type: z.enum(["site_visit", "booking"]),
-  preferredDate: z.string().optional(),
-  plotInterest: z.string().optional(),
+  preferredDate: z.string().trim().optional(),
+  plotInterest: z.string().trim().optional(),
 });
 
 export async function submitBooking(formData: FormData) {
+  const rawEmail = (formData.get("email")?.toString() || "").trim();
+  const rawPreferredDate = (formData.get("preferredDate")?.toString() || "").trim();
+  const rawPlotInterest = (formData.get("plotInterest")?.toString() || "").trim();
+
   const raw = {
-    name: formData.get("name") ?? undefined,
-    phone: formData.get("phone") ?? undefined,
-    email: formData.get("email") ?? undefined,
-    type: formData.get("type") ?? undefined,
-    preferredDate: formData.get("preferredDate") ?? undefined,
-    plotInterest: formData.get("plotInterest") ?? undefined,
+    name: formData.get("name")?.toString()?.trim() || "",
+    phone: formData.get("phone")?.toString()?.trim() || "",
+    email: rawEmail || undefined,
+    type: formData.get("type")?.toString()?.trim() || "booking",
+    preferredDate: rawPreferredDate || undefined,
+    plotInterest: rawPlotInterest || undefined,
   };
 
   const parsed = bookingSchema.safeParse(raw);
@@ -28,7 +37,11 @@ export async function submitBooking(formData: FormData) {
   }
 
   try {
-    await sendBookingNotification(parsed.data);
+    const res = await sendBookingNotification(parsed.data);
+    if (res?.error) {
+      console.error("Resend API error:", res.error);
+      return { error: res.error.message || "Failed to send email." };
+    }
     return { success: true, message: "We've received your request. Our team will confirm shortly." };
   } catch (error) {
     console.error("Failed to send booking notification:", error);
