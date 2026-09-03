@@ -17,34 +17,68 @@ const leadSchema = z.object({
   plotInterest: z.string().trim().optional(),
 });
 
-export async function submitLead(formData: FormData) {
-  const rawEmail = (formData.get("email")?.toString() || "").trim();
-  const rawMessage = (formData.get("message")?.toString() || "").trim();
-  const rawPlotInterest = (formData.get("plotInterest")?.toString() || "").trim();
+export type LeadPayload = {
+  name: string;
+  phone: string;
+  email?: string;
+  message?: string;
+  source: string;
+  plotInterest?: string;
+};
+
+export async function submitLead(input: FormData | Record<string, unknown>) {
+  let name = "";
+  let phone = "";
+  let email = "";
+  let message = "";
+  let source = "website";
+  let plotInterest = "";
+
+  if (input instanceof FormData) {
+    name = (input.get("name")?.toString() || "").trim();
+    phone = (input.get("phone")?.toString() || "").trim();
+    email = (input.get("email")?.toString() || "").trim();
+    message = (input.get("message")?.toString() || "").trim();
+    source = (input.get("source")?.toString() || "website").trim();
+    plotInterest = (input.get("plotInterest")?.toString() || "").trim();
+  } else if (input && typeof input === "object") {
+    name = String(input.name || "").trim();
+    phone = String(input.phone || "").trim();
+    email = String(input.email || "").trim();
+    message = String(input.message || "").trim();
+    source = String(input.source || "website").trim();
+    plotInterest = String(input.plotInterest || "").trim();
+  }
 
   const raw = {
-    name: formData.get("name")?.toString()?.trim() || "",
-    phone: formData.get("phone")?.toString()?.trim() || "",
-    email: rawEmail || undefined,
-    message: rawMessage || undefined,
-    source: formData.get("source")?.toString()?.trim() || "website",
-    plotInterest: rawPlotInterest || undefined,
+    name,
+    phone,
+    email: email || undefined,
+    message: message || undefined,
+    source: source || "website",
+    plotInterest: plotInterest || undefined,
   };
 
   const parsed = leadSchema.safeParse(raw);
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message || "Invalid input" };
+    const errorMsg = parsed.error.issues[0]?.message || "Invalid input";
+    console.error("submitLead validation error:", errorMsg, raw);
+    return { error: errorMsg };
   }
 
   try {
+    console.log(`[Lead Action] Sending lead for ${parsed.data.name} from ${parsed.data.source}...`);
     const res = await sendLeadNotification(parsed.data);
+    
     if (res?.error) {
-      console.error("Resend API error:", res.error);
+      console.error("[Lead Action] Resend API error:", res.error);
       return { error: res.error.message || "Failed to send email." };
     }
+    
+    console.log(`[Lead Action] Resend email delivered successfully! Email ID: ${res?.data?.id}`);
     return { success: true, message: "Thank you! We'll get back to you shortly." };
   } catch (error) {
-    console.error("Failed to send lead notification:", error);
+    console.error("[Lead Action] Exception sending lead notification:", error);
     return { error: "Something went wrong. Please try again or contact us on WhatsApp." };
   }
 }
