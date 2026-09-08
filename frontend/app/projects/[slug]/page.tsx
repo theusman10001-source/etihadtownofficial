@@ -12,6 +12,7 @@ import {
 import { breadcrumbList, faqPage, projectListingSchema } from "@/lib/schemas";
 import { absoluteUrl } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
+import { whatsappNumber } from "@/lib/contact";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -365,7 +366,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href={`https://wa.me/923112233379?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(140,198,63,0.35)] transition-all hover:scale-[1.02] hover:bg-accent-dark"
@@ -469,7 +470,7 @@ export default async function ProjectPage({ params }: Props) {
                       single conversation.
                     </p>
                     <a
-                      href={`https://wa.me/923112233379?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
+                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-[#20bd5a]"
