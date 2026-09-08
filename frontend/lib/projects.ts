@@ -347,23 +347,24 @@ export const projects: Project[] = [
     ],
     paymentPlans: [
       {
-        title: "Residential Plots (3-Year Plan)",
+        title: "Pre Launch Payment Plan — Residential Plots (3-Year Plan)",
+        note: "This price includes the cost of land only. Development charges will be charged separately. Prices are subject to change without prior notice. First installment will be due 30 days after submission of Booking Payment. 10% Premium factor will be charged on Corner & Park Facing plot. 15% Premium will be charged on units considering of both Factors.",
         rows: [
           {
-            size: "5 Marla", price: 6200000, downPayment: 1240000, downPaymentLabel: "20%",
-            installments: 30, monthly: 62000, balloons: 4, balloonAmount: 310000, ballot: 620000, possession: 1240000,
+            size: "5 Marla", price: 5900000, downPayment: 1180000, downPaymentLabel: "20%",
+            installments: 30, monthly: 59000, balloons: 4, balloonAmount: 295000, ballot: 590000, possession: 1180000,
           },
           {
-            size: "10 Marla", price: 11000000, downPayment: 2200000, downPaymentLabel: "20%",
-            installments: 30, monthly: 110000, balloons: 4, balloonAmount: 550000, ballot: 1100000, possession: 2200000,
+            size: "10 Marla", price: 10500000, downPayment: 2100000, downPaymentLabel: "20%",
+            installments: 30, monthly: 105000, balloons: 4, balloonAmount: 525000, ballot: 1050000, possession: 2100000,
           },
           {
-            size: "20 Marla", price: 20500000, downPayment: 4100000, downPaymentLabel: "20%",
-            installments: 30, monthly: 205000, balloons: 4, balloonAmount: 1025000, ballot: 2050000, possession: 4100000,
+            size: "20 Marla", price: 19500000, downPayment: 3900000, downPaymentLabel: "20%",
+            installments: 30, monthly: 195000, balloons: 4, balloonAmount: 975000, ballot: 1950000, possession: 3900000,
           },
           {
-            size: "40 Marla", price: 39000000, downPayment: 7800000, downPaymentLabel: "20%",
-            installments: 30, monthly: 390000, balloons: 4, balloonAmount: 1950000, ballot: 3900000, possession: 7800000,
+            size: "40 Marla", price: 37000000, downPayment: 7400000, downPaymentLabel: "20%",
+            installments: 30, monthly: 370000, balloons: 4, balloonAmount: 1850000, ballot: 3700000, possession: 7400000,
           },
         ],
       },
@@ -375,7 +376,7 @@ export const projects: Project[] = [
       },
       {
         question: "What is the total price of a 5 Marla plot in Phase IV?",
-        answer: "A 5 Marla plot in Phase IV is Rs. 62.00 Lacs, with a 20% down payment, ballot payment, 4 balloon payments, and 30 monthly installments.",
+        answer: "A 5 Marla plot in Phase IV is Rs. 59.00 Lacs, with a 20% down payment (Rs. 11.80 Lac), ballot payment (Rs. 5.90 Lac), 4 balloon payments (Rs. 2.95 Lac each), and 30 monthly installments of Rs. 59,000.",
       },
     ],
   },
