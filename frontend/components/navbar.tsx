@@ -5,7 +5,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "./motion";
-import { contactPhone, contactPhoneE164, whatsappNumber } from "@/lib/contact";
+import {
+  contactPhone,
+  contactPhoneE164,
+  whatsappNumber,
+  whatsappPhone,
+} from "@/lib/contact";
 
 const projectLinks = [
   { label: "Etihad Town Phase IV", href: "/projects/phase-4" },
@@ -156,7 +161,7 @@ export function Navbar() {
                   href={`https://wa.me/${whatsappNumber}?text=${message}`}
                   className="ml-4 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-all duration-200"
                 >
-                  {contactPhone}
+                  {whatsappPhone}
                 </Link>
               </motion.div>
             </div>
@@ -166,7 +171,7 @@ export function Navbar() {
                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
                 className="px-3 py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full hover:bg-accent-dark transition-colors whitespace-nowrap"
               >
-                {contactPhone}
+                {whatsappPhone}
               </Link>
               <button
                 className="p-2 text-primary"
@@ -311,7 +316,7 @@ export function Navbar() {
                     className="block w-full text-center mt-6 py-3 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark"
                     onClick={() => setMobileOpen(false)}
                   >
-                    {contactPhone}
+                    {whatsappPhone}
                   </Link>
                 </div>
               </div>
