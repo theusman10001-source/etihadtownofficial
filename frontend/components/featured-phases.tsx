@@ -5,6 +5,7 @@ import { motion } from "./motion";
 import { projects, getStartingPrice, formatPriceCr } from "@/lib/projects";
 
 const imageMap: Record<string, string> = {
+  "phase-5": "/images/phase-5.webp",
   "phase-4": "/images/phase-4.webp",
   "phase-3": "/images/phase-3.webp",
   "premier-enclave": "/images/premier-enclave.webp",
@@ -14,7 +15,7 @@ const imageMap: Record<string, string> = {
 };
 
 const featuredSlug = "phase-4";
-const otherSlugs = ["phase-3", "premier-enclave", "sialkot"];
+const otherSlugs = ["phase-5", "phase-3", "sialkot"];
 
 export function FeaturedPhases() {
   const featured = projects.find((p) => p.slug === featuredSlug)!;
@@ -118,7 +119,7 @@ export function FeaturedPhases() {
                       </h3>
                     </div>
                     <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                      phase.status === "Available"
+                      phase.status === "Available" || phase.status === "Upcoming"
                         ? "bg-accent/10 text-accent-dark"
                         : "bg-amber-50 text-amber-700"
                     }`}>
@@ -130,7 +131,9 @@ export function FeaturedPhases() {
                   </p>
                   <div className="flex items-center justify-between pt-3 border-t border-neutral-100">
                     <span className="text-sm font-bold text-accent">
-                      From {formatPriceCr(getStartingPrice(phase))}
+                      {getStartingPrice(phase) > 0
+                        ? `From ${formatPriceCr(getStartingPrice(phase))}`
+                        : "Pre-Launch / EOI Open"}
                     </span>
                     <svg
                       className="w-4 h-4 text-neutral-300 group-hover:text-accent transition-colors"

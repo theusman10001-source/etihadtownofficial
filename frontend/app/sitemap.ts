@@ -8,6 +8,7 @@ const projectImages: Record<string, string> = {
   "phase-2": "/images/phase-2.webp",
   "phase-3": "/images/phase-3.webp",
   "phase-4": "/images/phase-4.webp",
+  "phase-5": "/images/phase-5.webp",
   "premier-enclave": "/images/premier-enclave.webp",
   sialkot: "/images/sialkot.webp",
 };

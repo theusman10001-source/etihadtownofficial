@@ -13,6 +13,7 @@ import {
 } from "@/lib/contact";
 
 const projectLinks = [
+  { label: "Etihad Town Phase V (Upcoming)", href: "/projects/phase-5" },
   { label: "Etihad Town Phase IV", href: "/projects/phase-4" },
   { label: "Etihad Town Phase III", href: "/projects/phase-3" },
   { label: "Etihad Town Phase II", href: "/projects/phase-2" },

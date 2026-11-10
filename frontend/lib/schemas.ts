@@ -136,6 +136,7 @@ const availabilityMap: Record<string, string> = {
   Available: "https://schema.org/InStock",
   Limited: "https://schema.org/LimitedAvailability",
   "Waiting List": "https://schema.org/PreOrder",
+  Upcoming: "https://schema.org/PreOrder",
   "Sold Out": "https://schema.org/SoldOut",
 };
 

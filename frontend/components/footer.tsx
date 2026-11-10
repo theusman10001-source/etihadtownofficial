@@ -71,6 +71,7 @@ export function Footer() {
               Projects
             </h4>
             <ul className="space-y-2.5 text-sm">
+              <li><Link href="/projects/phase-5" className="text-neutral-500 hover:text-accent transition-colors">Phase V (Upcoming)</Link></li>
               <li><Link href="/projects/phase-4" className="text-neutral-500 hover:text-accent transition-colors">Phase IV</Link></li>
               <li><Link href="/projects/phase-3" className="text-neutral-500 hover:text-accent transition-colors">Phase III</Link></li>
               <li><Link href="/projects/phase-2" className="text-neutral-500 hover:text-accent transition-colors">Phase II</Link></li>

@@ -12,6 +12,7 @@ import {
 import { breadcrumbList, faqPage, projectListingSchema } from "@/lib/schemas";
 import { absoluteUrl } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
+import { PriorityRegistrationForm } from "@/components/priority-registration-form";
 import { whatsappNumber } from "@/lib/contact";
 
 interface Props {
@@ -48,6 +49,7 @@ const statusStyle: Record<string, string> = {
   Available: "bg-accent/15 text-accent border-accent/30",
   Limited: "bg-amber-400/15 text-amber-300 border-amber-400/30",
   "Waiting List": "bg-blue-400/15 text-blue-200 border-blue-400/30",
+  Upcoming: "bg-accent/20 text-accent border-accent/40",
   "Sold Out": "bg-white/10 text-white/60 border-white/15",
 };
 
@@ -327,13 +329,22 @@ export default async function ProjectPage({ params }: Props) {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4">
-              {startingPrice > 0 && (
+              {startingPrice > 0 ? (
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.15em] text-white/55">
                     Starting from
                   </p>
                   <p className="mt-1 text-2xl font-extrabold text-accent md:text-3xl">
                     {priceLabel}
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.15em] text-white/55">
+                    Launch Status
+                  </p>
+                  <p className="mt-1 text-xl font-extrabold text-accent md:text-2xl">
+                    Pre-Launch / EOI Open
                   </p>
                 </div>
               )}
@@ -365,11 +376,23 @@ export default async function ProjectPage({ params }: Props) {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
+                {project.status === "Upcoming" && (
+                  <a
+                    href="#register-interest"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(140,198,63,0.35)] transition-all hover:scale-[1.02] hover:bg-accent-dark"
+                  >
+                    Register Priority Interest
+                  </a>
+                )}
                 <Link
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(140,198,63,0.35)] transition-all hover:scale-[1.02] hover:bg-accent-dark"
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] ${
+                    project.status === "Upcoming"
+                      ? "border border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                      : "bg-accent shadow-[0_10px_30px_rgba(140,198,63,0.35)] hover:bg-accent-dark"
+                  }`}
                 >
                   <svg
                     className="h-4 w-4"
@@ -453,6 +476,56 @@ export default async function ProjectPage({ params }: Props) {
                   <PriceTable group={group} />
                 </Reveal>
               ))}
+
+              {project.expectedOfferings &&
+                project.expectedOfferings.length > 0 && (
+                  <Reveal delay={0.15}>
+                    <div className="mt-12">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h3 className="text-xl font-bold text-primary">
+                          Planned Plot Offerings &amp; Categories
+                        </h3>
+                        <span className="rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent-dark">
+                          Pre-Launch Rates Coming Soon
+                        </span>
+                      </div>
+                      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+                        {project.expectedOfferings.map((item) => (
+                          <div
+                            key={item.category}
+                            className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_10px_30px_rgba(7,30,69,0.05)]"
+                          >
+                            <h4 className="text-base font-bold text-primary">
+                              {item.category}
+                            </h4>
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {item.sizes.map((s) => (
+                                <span
+                                  key={s}
+                                  className="rounded-lg border border-accent/25 bg-soft px-3 py-1.5 text-xs font-semibold text-primary"
+                                >
+                                  {s}
+                                </span>
+                              ))}
+                            </div>
+                            <p className="mt-4 text-xs leading-relaxed text-neutral-500">
+                              {item.note}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Reveal>
+                )}
+
+              {project.status === "Upcoming" && (
+                <Reveal delay={0.2}>
+                  <PriorityRegistrationForm
+                    projectName={`Etihad Town ${project.name}`}
+                    projectSlug={project.slug}
+                  />
+                </Reveal>
+              )}
             </div>
 
             <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
@@ -460,14 +533,16 @@ export default async function ProjectPage({ params }: Props) {
                 <div className="overflow-hidden rounded-3xl border border-white/10 bg-primary shadow-[0_30px_80px_rgba(7,30,69,0.35)]">
                   <div className="bg-gradient-to-r from-accent to-accent-dark px-7 py-5">
                     <h3 className="text-sm font-bold uppercase tracking-wider text-white">
-                      Interested in this phase?
+                      {project.status === "Upcoming"
+                        ? "Pre-Launch Priority Access"
+                        : "Interested in this phase?"}
                     </h3>
                   </div>
                   <div className="p-7">
                     <p className="text-sm leading-relaxed text-white/75">
-                      Our team can share current availability, exact pricing,
-                      and guide you through the booking process — all in a
-                      single conversation.
+                      {project.status === "Upcoming"
+                        ? "Register your priority interest or message our official sales team on WhatsApp to get pre-launch rates, master plan updates, and early-bird booking access."
+                        : "Our team can share current availability, exact pricing, and guide you through the booking process — all in a single conversation."}
                     </p>
                     <a
                       href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ${project.name} at Etihad Town.`)}`}
@@ -525,12 +600,16 @@ export default async function ProjectPage({ params }: Props) {
                         {project.location}
                       </dd>
                     </div>
-                    {startingPrice > 0 && (
-                      <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
-                        <dt className="text-neutral-400">Starting From</dt>
-                        <dd className="font-bold text-accent">{priceLabel}</dd>
-                      </div>
-                    )}
+                    <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+                      <dt className="text-neutral-400">
+                        {startingPrice > 0 ? "Starting From" : "Payment Plan"}
+                      </dt>
+                      <dd className="font-bold text-accent">
+                        {startingPrice > 0
+                          ? priceLabel
+                          : "To Be Announced"}
+                      </dd>
+                    </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-neutral-400">Developer</dt>
                       <dd className="font-medium text-neutral-700">

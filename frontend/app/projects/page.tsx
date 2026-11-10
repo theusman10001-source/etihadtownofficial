@@ -5,6 +5,7 @@ import { breadcrumbList } from "@/lib/schemas"
 import { Reveal } from "@/components/reveal"
 
 const imageMap: Record<string, string> = {
+  "phase-5": "/images/phase-5.webp",
   "phase-4": "/images/phase-4.webp",
   "phase-3": "/images/phase-3.webp",
   "premier-enclave": "/images/premier-enclave.webp",
@@ -16,7 +17,7 @@ const imageMap: Record<string, string> = {
 export const metadata: Metadata = {
   title: "Projects, Payment Plans & Availability",
   description:
-    "Explore all Etihad Town Lahore projects — Phase I, II, III, IV, Premier Enclave, and Sialkot. View payment plans, sizes, and availability.",
+    "Explore all Etihad Town Lahore projects — Phase I, II, III, IV, upcoming Phase V, Premier Enclave, and Sialkot. View payment plans, sizes, and availability.",
   alternates: { canonical: "/projects" },
   openGraph: {
     title: "Etihad Town Projects, Payment Plans & Availability",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 }
 
 const heroStats = [
-  { value: "6", label: "Projects" },
+  { value: "7", label: "Projects" },
   { value: "3", label: "Cities" },
   { value: "50,000+", label: "Kanals Planned" },
   { value: "LDA", label: "Approved" },
@@ -38,6 +39,7 @@ const statusStyle: Record<string, string> = {
   Available: "bg-accent/15 text-accent border-accent/30",
   Limited: "bg-amber-400/15 text-amber-300 border-amber-400/30",
   "Waiting List": "bg-blue-400/15 text-blue-200 border-blue-400/30",
+  Upcoming: "bg-accent/20 text-accent border-accent/40",
   "Sold Out": "bg-white/10 text-white/60 border-white/15",
 }
 
@@ -79,8 +81,9 @@ export default function ProjectsPage() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-2xl text-base leading-[1.7] text-white/80 md:text-lg">
-              From Phase I to our latest Phase IV and the expansion into Sialkot —
-              six projects, each with its own character, location, and payment plan.
+              From Phase I to Phase IV, our upcoming Phase V on Jati Umrah Road,
+              and the expansion into Sialkot — seven projects, each with its own
+              character, location, and payment plan.
             </p>
           </Reveal>
 
@@ -196,10 +199,14 @@ export default function ProjectsPage() {
                       <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-5">
                         <div>
                           <p className="text-[10px] uppercase tracking-[0.14em] text-neutral-400">
-                            Starting from
+                            {getStartingPrice(project) > 0
+                              ? "Starting from"
+                              : "Launch Status"}
                           </p>
                           <p className="mt-1 text-base font-bold text-accent">
-                            {formatPriceCr(getStartingPrice(project))}
+                            {getStartingPrice(project) > 0
+                              ? formatPriceCr(getStartingPrice(project))
+                              : "Pre-Launch / EOI Open"}
                           </p>
                         </div>
                         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-soft text-primary transition-colors group-hover:bg-accent group-hover:text-white">

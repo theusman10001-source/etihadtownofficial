@@ -23,18 +23,25 @@ export interface PaymentPlanGroup {
   rows: PaymentPlanRow[]
 }
 
+export interface ExpectedOffering {
+  category: string
+  sizes: string[]
+  note: string
+}
+
 export interface Project {
   slug: string
   name: string
   tagline: string
   description: string
   longDescription: string[]
-  status: "Available" | "Limited" | "Sold Out" | "Waiting List"
+  status: "Available" | "Limited" | "Sold Out" | "Waiting List" | "Upcoming"
   gradient: string
   location: string
   features: string[]
   locationHighlights?: string[]
   paymentPlans?: PaymentPlanGroup[]
+  expectedOfferings?: ExpectedOffering[]
   faqs?: { question: string; answer: string }[]
 }
 
@@ -377,6 +384,69 @@ export const projects: Project[] = [
       {
         question: "What is the total price of a 5 Marla plot in Phase IV?",
         answer: "A 5 Marla plot in Phase IV is Rs. 59.00 Lacs, with a 20% down payment (Rs. 11.80 Lac), ballot payment (Rs. 5.90 Lac), 4 balloon payments (Rs. 2.95 Lac each), and 30 monthly installments of Rs. 59,000.",
+      },
+    ],
+  },
+  {
+    slug: "phase-5",
+    name: "Phase V",
+    tagline: "The next chapter of Etihad Town — an upcoming master-planned community near Fazaia Housing Scheme Phase II on Jati Umrah Road.",
+    description: "Etihad Town Phase V is an upcoming landmark residential and commercial development near Fazaia Housing Scheme Phase II on Jati Umrah Road, Lahore. Register your priority interest for pre-launch pricing, early bird allocation, and flexible installment plans.",
+    longDescription: [
+      "Building on the extraordinary success of Phases I through IV, Etihad Town Phase – V represents the next evolution of modern community living in Lahore. Positioned in a prime growth corridor near Fazaia Housing Scheme Phase II on Jati Umrah Road, Phase – V is being master-planned to deliver signature infrastructure, lush green boulevards, and high-yield investment opportunities.",
+      "Designed for both homeowners and forward-looking investors, Phase – V will feature thoughtfully zoned residential blocks, a vibrant commercial boulevard, underground utilities, and world-class lifestyle amenities. Early Expression of Interest (EOI) and priority pre-launch registration are now open.",
+    ],
+    status: "Upcoming",
+    gradient: "from-primary-dark to-primary",
+    location: "Near Fazaia Housing Scheme Phase II, Jati Umrah Road, Lahore",
+    features: [
+      "Master-planned gated community",
+      "Wide carpeted boulevards",
+      "Underground electricity & utilities",
+      "Grand Mosque & Family Parks",
+      "Dedicated commercial avenue",
+      "24/7 smart security & surveillance",
+      "Community club & sports complex",
+      "Eco-friendly green belts",
+    ],
+    locationHighlights: [
+      "Adjacent to Fazaia Housing Scheme Phase II",
+      "Prime frontage & direct access on Jati Umrah Road",
+      "03 minutes' drive from Lahore Ring Road (Adda Plot Interchange)",
+      "05 minutes' drive from Main Raiwind Road",
+      "05 minutes' drive from Lake City",
+      "10 minutes' drive from Pine Avenue & Etihad Town Phase III / IV",
+      "15 minutes' drive from Thokar Niaz Baig & M2 Motorway",
+      "30 minutes' drive from Allama Iqbal International Airport",
+    ],
+    expectedOfferings: [
+      {
+        category: "Residential Plots",
+        sizes: ["5 Marla", "10 Marla", "1 Kanal (20 Marla)", "2 Kanal (40 Marla)"],
+        note: "Expected 3-Year flexible pre-launch installment plan with early-bird booking terms.",
+      },
+      {
+        category: "Commercial Plots",
+        sizes: ["4 Marla", "5.33 Marla", "8 Marla"],
+        note: "Prime main boulevard and sector commercial plots designed for high footfall and capital appreciation.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Where is Etihad Town Phase V located?",
+        answer: "Etihad Town Phase V is strategically located near Fazaia Housing Scheme Phase II on Jati Umrah Road, Lahore — just minutes away from the Lahore Ring Road (Adda Plot Interchange), Lake City, and Main Raiwind Road.",
+      },
+      {
+        question: "When will the official payment plan for Phase V be announced?",
+        answer: "Etihad Town Phase V is currently in its upcoming pre-launch phase. Official pre-launch rates and payment plans will be announced soon. You can register your priority interest today to receive the payment plan first.",
+      },
+      {
+        question: "What plot sizes are expected in Etihad Town Phase V?",
+        answer: "Phase V is planned to offer 5 Marla, 10 Marla, 1 Kanal, and 2 Kanal residential plots along with 4 Marla, 5.33 Marla, and 8 Marla commercial plots on flexible 3-year installment plans.",
+      },
+      {
+        question: "How can I book or register priority interest for Phase V?",
+        answer: "You can submit an Expression of Interest (EOI) using the priority registration form on this page or reach out to our official sales team on WhatsApp to get notified as soon as pre-launch bookings open.",
       },
     ],
   },

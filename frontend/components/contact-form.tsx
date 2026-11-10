@@ -118,6 +118,7 @@ export function ContactForm() {
               className={inputClass}
             >
               <option value="">Select a phase</option>
+              <option value="phase-5">Etihad Town Phase V (Upcoming)</option>
               <option value="phase-4">Etihad Town Phase IV</option>
               <option value="phase-3">Etihad Town Phase III</option>
               <option value="phase-2">Etihad Town Phase II</option>

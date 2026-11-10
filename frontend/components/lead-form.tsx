@@ -125,6 +125,7 @@ export function LeadForm() {
                       className="w-full px-4 py-3 pr-10 bg-soft border border-transparent text-neutral-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:border-accent focus:bg-white transition-all"
                     >
                       <option value="">Select a phase</option>
+                      <option value="phase-5">Phase V (Upcoming)</option>
                       <option value="phase-4">Phase IV</option>
                       <option value="phase-3">Phase III</option>
                       <option value="premier-enclave">Premier Enclave</option>

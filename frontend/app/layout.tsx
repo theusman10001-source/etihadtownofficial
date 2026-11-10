@@ -128,6 +128,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${poppins.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -135,7 +136,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col font-[family-name:var(--font-poppins)]">
+      <body
+        className="min-h-screen flex flex-col font-[family-name:var(--font-poppins)]"
+        suppressHydrationWarning
+      >
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9XD8Y1VEHS"
           strategy="afterInteractive"
